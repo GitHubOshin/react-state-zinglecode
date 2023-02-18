@@ -33,6 +33,12 @@ function App() {
     setNote(startNote)
   }
 
+  function onNoteDelete(id) {
+    setAllNotes((prevAllNotes) => {
+      return prevAllNotes.filter((theNote) => theNote.id !== id)
+    })
+  }
+
   // Elements
 
   const noteElements = allNotes.map((theNote) => {
@@ -40,6 +46,11 @@ function App() {
       <div key={theNote.id} className="app-note">
         <p>{theNote.content}</p>
         <h5>{theNote.author}</h5>
+        <p>
+          <a>Edit</a>
+          <span> | </span>
+          <a onClick={() => onNoteDelete(theNote.id)}>Delete</a>
+        </p>
       </div>
     )
   })
