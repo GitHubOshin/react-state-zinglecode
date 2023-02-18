@@ -1,7 +1,45 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
-  return <section className="app-section"></section>
+  const [note, setNote] = useState({
+    content: '',
+    author: ''
+  })
+  function onNoteValueChange(e) {
+    console.log(e.target)
+    const { name, value } = e.target
+    setNote((prevNote) => {
+      return { ...prevNote, [name]: [value] }
+    })
+  }
+
+  return (
+    <section className="app-section">
+      <div className="app-container">
+        <h3>Smile</h3>
+        <p>
+          <textarea
+            rows="3"
+            placeholder="Write what you want..."
+            type="text"
+            name="content"
+            value={note.content}
+            onChange={onNoteValueChange}
+          />
+        </p>
+        <p>
+          <input
+            placeholder="Author name"
+            type="text"
+            name="author"
+            value={note.author}
+            onChange={onNoteValueChange}
+          />
+        </p>
+      </div>
+    </section>
+  )
 }
 
 export default App
